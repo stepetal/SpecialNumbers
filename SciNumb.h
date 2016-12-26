@@ -7,6 +7,7 @@
 
 enum InOutTypes{ Console, File };
 
+//abstract class for input
 class InputType{
 	std::vector<std::string> info;
 	std::regex number_format;
@@ -21,7 +22,7 @@ protected:
 
 class InputConsole : public InputType{
 public:
-	void GetInfo(std::string input_name);
+	void GetInfo(std::string input_name);//in this case input_name means nothing
 };
 
 class InputFile :public InputType{
@@ -29,6 +30,8 @@ public:
 	void GetInfo(std::string input_name);
 };
 
+
+//abstract class for output
 class OutputType{
 	std::vector<std::string> info_out;
 public:
@@ -39,17 +42,16 @@ protected:
 	std::vector<std::string> GetOutInfo(){ return info_out; } 
 };
 
+
 class OutputFile :public OutputType{
 	void WriteInfo(std::string output_name);
 };
 
 class OutputConsole :public OutputType{
-	void WriteInfo(std::string output_name);
+	void WriteInfo(std::string output_name);//in this case output_name means nothing
 };
 
-
-
-
+//for manipulating with numbers
 class SciNumb{
 	std::shared_ptr<InputType> i_type_number;
 public:
@@ -57,5 +59,5 @@ public:
 	std::shared_ptr<InputType> GetSciNumb(){ return i_type_number; }
 };
 
-InputType* GetInputType(InOutTypes i_o_type);
-OutputType* GetOutputType(InOutTypes i_o_type);
+InputType* GetInputType(InOutTypes i_o_type);//input factory
+OutputType* GetOutputType(InOutTypes i_o_type);//output factory
