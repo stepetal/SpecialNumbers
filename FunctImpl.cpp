@@ -2,7 +2,7 @@
 #include "SciNumb.h"
 
 
-
+//input factory
 InputType* GetInputType(InOutTypes i_o_type)
 {
 	InputType *new_type = NULL;
@@ -18,7 +18,7 @@ InputType* GetInputType(InOutTypes i_o_type)
 	}
 	return new_type;
 }
-
+//output factory
 OutputType* GetOutputType(InOutTypes i_o_type)
 {
 	OutputType* new_type = NULL;
@@ -55,6 +55,16 @@ void OutputFile::WriteInfo(std::string output_name)
 void InputConsole::GetInfo(std::string input_name)
 {
 	std::cout << "Enter numbers or 'quit' to exit\n";
+	/*
+	 regular expression for scientific numbers.
+	 Something like:
+	 1.5E-10
+	 1.0
+	 100
+	 1.3e12
+	 +1E+45
+	 would be correct
+	*/
 	std::string name_format = R"((\+|-)?([[:digit:]]+)(\.[[:digit:]]+)?((e|E)?(\+|-)?([[:digit:]]+))?)";
 	std::regex reg(name_format);
 	std::string number;
